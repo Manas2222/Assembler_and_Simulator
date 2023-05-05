@@ -25,12 +25,12 @@ def functionMapper(lst):
 with open("Input.txt") as f:
     lst = f.readlines()
 
-instructions = [i.strip().split(' ') for i in lst]
+instruction = [i.strip().split(' ') for i in lst]
 
 # print(lst)
-# print(instructions)
+# print(instruction)
 
-for i in instructions:
+for i in instruction:
     if (i[0][-1] == ':'):
         # labels[i[0][:-1]] =
         pass 
