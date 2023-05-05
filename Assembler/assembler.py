@@ -21,5 +21,25 @@ def opcode(var):
         'je' : '11111',
         'hlt' : '11010'
 
-
     }
+    if var in opcodes.keys():
+        return opcodes[var]
+    return -1
+
+def registers(var):
+    register = {
+        'R1' : '000',
+        'R2' : '001',
+        'R3' : '010',
+        'R4' : '011',
+        'R5' : '100',
+        'R6' : '110',
+        'R7' : '111'
+    }
+
+    if var in register.keys():
+        return registers[var]
+    return -1
+
+
+
