@@ -38,8 +38,8 @@ def registers(var):
     }
 
     if var in register.keys():
-        return registers[var]
+        return register[var]
     return -1
 
 
-
+errors = 0
