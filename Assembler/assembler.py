@@ -1,45 +1,39 @@
-def opcode(var):
-    opcodes = {
-        'add' : '00000',
-        'sub' : '00001',
-        'mov' : '00010',
-        'mov_reg' : '00011',
-        'ld' : '00100',
-        'st' : '00101',
-        'mul' : '00110',
-        'div' : '00111',
-        'rs' : '01000',
-        'ls' : '01001',
-        'xor' : '01010',
-        'or' : '01011',
-        'and' : '01100',
-        'not' : '01101',
-        'cmp' : '01110',
-        'jmp' : '01111',
-        'jlt' : '11100',
-        'jgt' : '11101',
-        'je' : '11111',
-        'hlt' : '11010'
+from instructions import *
 
-    }
-    if var in opcodes.keys():
-        return opcodes[var]
-    return -1
-
-def registers(var):
-    register = {
-        'R1' : '000',
-        'R2' : '001',
-        'R3' : '010',
-        'R4' : '011',
-        'R5' : '100',
-        'R6' : '110',
-        'R7' : '111'
-    }
-
-    if var in register.keys():
-        return register[var]
-    return -1
+errorsFound = []
+labels = {}
+variables = {}
+machineCode = []
+haltInstruction = []
 
 
-errors = 0
+
+
+def functionMapper(lst):
+    x = lst[0]
+    if x == 'xor':
+        return exclusive_or(lst)
+    elif x == 'or':
+        return Or(lst)
+    elif x == 'and':
+        return And(lst)
+    elif x == 'not':
+        return invert(lst)
+    elif x == 'cmp':
+        return compare(lst)
+    
+with open("Input.txt") as f:
+    lst = f.readlines()
+
+instructions = [i.strip().split(' ') for i in lst]
+
+# print(lst)
+# print(instructions)
+
+for i in instructions:
+    if (i[0][-1] == ':'):
+        # labels[i[0][:-1]] =
+        pass 
+    else:
+        print(functionMapper(i))
+
