@@ -1,9 +1,13 @@
-# import csv
 from Helper import *
 
 
 def Addition(Lst):
     if (len(Lst) != 4):
+        print("General Syntax Error")
+        return -1
+    
+    if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
+        print("Illegal use of flags register")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -20,6 +24,11 @@ def Addition(Lst):
 
 def Subtraction(Lst):
     if (len(Lst) != 4):
+        print("General Syntax Error")
+        return -1
+    
+    if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
+        print("Illegal use of flags register")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -34,6 +43,11 @@ def Subtraction(Lst):
 
 def Multiply(Lst):
     if (len(Lst) != 4):
+        print("General Syntax Error")
+        return -1
+    
+    if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
+        print("Illegal use of flags register")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -48,9 +62,14 @@ def Multiply(Lst):
 
 def Divide(Lst):
     if (len(Lst) != 3):
+        print("General Syntax Error")
+        return -1
+    
+    if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS'):
+        print("Illegal use of flags register")
         return -1
 
-    if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
+    if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1):
         return -1
 
     op_code = opcode(Lst[0])
@@ -62,38 +81,43 @@ def Divide(Lst):
 
 def MoveImmediate(lst):
     if (len(lst) != 3):
+        print("General Syntax Error")
         return -1
 
     if (registers(lst[1]) == -1):
+        return -1
+    
+    if lst[1] == 'FLAGS':
+        print("Illegal use of flags register")
         return -1
 
     op_code = opcode(lst[0])
     if (op_code == -1):
         return -1
     if '.' in lst[2][1:]:
-        # print("immediate should be whole number")
+        print("immediate should be whole number")
         return -1
     if not(int(lst[2][1:]) >= 0 and int(lst[2][1:]) <= 127):
         # print("Faulty immediate value")
+        print("Illegal immediate value")
         return -1
 
     imm = bin(int(lst[2][1:]))[2:]
-    if len(imm) > 7:
-        return -1
+    
     imm_val = (7-len(str(imm)))*'0' + imm
-
     val = op_code + '0' + registers(lst[1]) + imm_val
     return val
     # pass
 
 def MoveRegister(lst):
     if (len(lst) != 3):
+        print("General Syntax Error")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1):
         return -1
 
-    op_code = opcode(lst[0])
+    op_code = opcode("mov_reg")
     if (op_code == -1):
         return -1
     val = op_code + '00000' + registers(lst[1]) + registers(lst[2])

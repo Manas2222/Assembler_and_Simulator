@@ -1,9 +1,4 @@
 
-
-
-
-
-
 def opcode(var):
     opcodes = {
         'add' : '00000',
@@ -30,6 +25,7 @@ def opcode(var):
     }
     if var in opcodes.keys():
         return opcodes[var]
+    print("General Syntax Error")
     return -1
 
 def registers(var):
@@ -41,22 +37,13 @@ def registers(var):
         'R4' : '100',
         'R5' : '101',
         'R6' : '110',
-        'R7' : '111'
+        'FLAGS' : '111'
     }
 
     if var in register.keys():
         return register[var]
+    print("Typo in register name")
     return -1
 
 
 # convertToNum
-def checkIfBinary(str):
-    for i in range (len(str)):
-        if str[i] == 0 or str[i] == 1:
-            continue
-        else:
-            return False
-    return True
-
-
-

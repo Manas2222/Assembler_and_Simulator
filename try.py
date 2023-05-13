@@ -16,5 +16,9 @@
 # print(a)
 # print(type(a))
 
-b = 12457654
-print(b[2])
+# b = 12457654
+# print(b[2])
+lst = []
+a = '      '
+lst.append(a.strip())
+print(lst)
