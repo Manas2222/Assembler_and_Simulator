@@ -50,5 +50,13 @@ def registers(var):
 
 
 # convertToNum
+def checkIfBinary(str):
+    for i in range (len(str)):
+        if str[i] == 0 or str[i] == 1:
+            continue
+        else:
+            return False
+    return True
+
 
 

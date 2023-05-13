@@ -11,7 +11,35 @@ variables = {}
 machineCode = []
 haltInstruction = []
 
+def load(lst):
+    if len(lst) != 3:
+        return -1
+    
+    if registers(lst[1]) == -1:
+        return -1
+    
+    opcod = opcode(lst[0])
+    if opcod == -1:
+        return -1
+    
+    val = opcod + '0' + registers(lst[1]) + lst[2]
+    return val
 
+def store(lst):
+    if len(lst) != 3:
+        return -1
+    
+    if registers(lst[1]) == -1:
+        return -1
+    
+    opcod = opcode(lst[0])
+    if opcod == -1:
+        return -1
+    
+    val = opcod + '0' + registers(lst[1]) + lst[2]
+    return val
+
+    
 
 
 def functionMapper(lst):
@@ -31,6 +59,8 @@ def functionMapper(lst):
     elif x == 'sub':
         return Subtraction(lst)
     elif x == 'mov':
+        if len(lst) != 3:
+            return -1
         if lst[2][0] == '$':
             return MoveImmediate(lst)
         else:
@@ -54,9 +84,27 @@ def functionMapper(lst):
     elif x == 'hlt':
         return halt(lst)
     elif x == 'ld':
-        pass
+        if len(lst) != 3:
+            return -1
+        if lst[2] in variables.keys():
+            lst[2] = variables[lst[2]]
+            return load(lst)
+        if len(lst[2]) == 7 and checkIfBinary(lst[2]):
+            return load(lst)
+        print("Wrong address")
+        return -1
     elif x == 'st':
-        pass
+        if len(lst) != 3:
+            return -1
+        if lst[2] in variables.keys():
+            lst[2] = variables[lst[2]]
+            return store(lst)
+        if len(lst[2]) == 7 and checkIfBinary(lst[2]):
+            return store(lst)
+        print("Wrong address")
+        return -1
+
+    print("Typo in instruction name")
     return -1
 
 
@@ -93,9 +141,10 @@ for i in range (len(instruction)):
     else:
         varChecker = True
         if functionMapper(instruction[i]) == -1:
-            errorsFound.append("There is error in line numbered at ",i, "(after removing empty lines)")
+            errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
             break
         print(functionMapper(instruction[i]))
 
-
+for errors in errorsFound:
+    print(errors)
 

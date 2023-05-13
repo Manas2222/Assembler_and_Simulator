@@ -13,8 +13,7 @@ def Addition(Lst):
     if (op_code == -1):
         return -1
 
-    val = op_code + '00' + \
-        registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
+    val = op_code + '00' + registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
 
     return val
 
@@ -29,8 +28,7 @@ def Subtraction(Lst):
     op_code = opcode(Lst[0])
     if (op_code == -1):
         return -1
-    val = op_code + '00' + \
-        registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
+    val = op_code + '00' + registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
     return val
 
 
@@ -44,8 +42,7 @@ def Multiply(Lst):
     op_code = opcode(Lst[0])
     if (op_code == -1):
         return -1
-    val = op_code + '00' + \
-        registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
+    val = op_code + '00' + registers(Lst[1]) + registers(Lst[2]) + registers(Lst[3])
     return val
 
 
@@ -63,33 +60,46 @@ def Divide(Lst):
     return val
 
 
-def MoveImmediate(Lst):
-    if (len(Lst) != 3):
+def MoveImmediate(lst):
+    if (len(lst) != 3):
         return -1
 
-    if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
+    if (registers(lst[1]) == -1):
         return -1
 
-    op_code = opcode(Lst[0])
+    op_code = opcode(lst[0])
     if (op_code == -1):
         return -1
-    if len(str(Lst[2])) != 7:
+    if '.' in lst[2][1:]:
+        # print("immediate should be whole number")
         return -1
-    val = op_code + '0' + registers(Lst[1]) + str(Lst[2])
+    if not(int(lst[2][1:]) >= 0 and int(lst[2][1:]) <= 127):
+        # print("Faulty immediate value")
+        return -1
+
+    imm = bin(int(lst[2][1:]))[2:]
+    if len(imm) > 7:
+        return -1
+    imm_val = (7-len(str(imm)))*'0' + imm
+
+    val = op_code + '0' + registers(lst[1]) + imm_val
     return val
+    # pass
 
-
-def MoveRegister(Lst):
-    if (len(Lst) != 3):
+def MoveRegister(lst):
+    if (len(lst) != 3):
         return -1
 
-    if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
+    if (registers(lst[1]) == -1 or registers(lst[2]) == -1):
         return -1
 
-    op_code = opcode(Lst[0])
+    op_code = opcode(lst[0])
     if (op_code == -1):
         return -1
-    val = op_code + '00000' + registers(Lst[1]) + registers(Lst[2])
+    val = op_code + '00000' + registers(lst[1]) + registers(lst[2])
     return val
+    
 
-
+# lst1_2 = ['mov','R3','$0']
+# answer = MoveImmediate(lst1_2)
+# print(answer)
