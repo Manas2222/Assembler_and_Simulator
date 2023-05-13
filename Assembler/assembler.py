@@ -84,6 +84,7 @@ def functionMapper(lst):
     elif x == 'hlt':
         return halt(lst)
     elif x == 'ld':
+        print(lst)
         if len(lst) != 3:
             return -1
         if lst[2] in variables.keys():
@@ -91,6 +92,7 @@ def functionMapper(lst):
             return load(lst)
         if len(lst[2]) == 7 and checkIfBinary(lst[2]):
             return load(lst)
+        
         print("Wrong address")
         return -1
     elif x == 'st':
@@ -137,14 +139,40 @@ for i in range (len(instruction)):
             errorsFound.append("All variables must be defined in the beginning")
             break
         variables[instruction[i][1]] = (7 - len(bin(0 + len(variables.keys()))[2:]))*'0' + bin(0 + len(variables.keys()))[2:]
+        # print(f"added var {lst[0]} with val = {(7 - len(bin(0 + len(variables.keys()))[2:]))*'0' + bin(0 + len(variables.keys()))[2:]}")
 
     else:
         varChecker = True
+        if instruction[i][0] == 'st' or instruction[i][0] == 'ld':
+            if len(instruction[i]) != 3:
+                errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
+                print("General syntax error")
+                break
+            if checkIfBinary(instruction[i][1]) == True:
+                machineCode.append(load(instruction[i]))
+            else:
+                if instruction[i][2] not in variables.keys():
+                    errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
+                    print("No such variable exists")
+                    break
+                else:
+                    instruction[i][2] = variables[instruction[i][2]]
+                    machineCode.append(load(instruction[i]))
+                    continue
+            errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
+            break
+
         if functionMapper(instruction[i]) == -1:
             errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
             break
-        print(functionMapper(instruction[i]))
+        # if functionMapper(instruction[i]) == -1:
+        #     errorsFound.append(f"There is error in line numbered at {i+1} (after removing empty lines)")
+        #     break
+        machineCode.append(functionMapper(instruction[i]))
 
 for errors in errorsFound:
     print(errors)
+# print(variables)
+for code in machineCode:
+    print(code)
 
