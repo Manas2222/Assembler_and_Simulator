@@ -187,16 +187,18 @@ if len(errorsFound) == 0:
     for i in range (len(instruction_temp)):
         lastInstuction+=1
 
-        if instruction_temp[i] == '':
+        if instruction_temp[i] == []:
+            # print('1')
             continue
 
         line = instruction_temp[i]
+        # print(line)
 
         if i in label_lines_to_visit:
             lst_tmp = []
             for j in range (1,len(instruction_temp[i])):
                 lst_tmp.append(instruction_temp[i][j])
-            line = lst_tmp
+            # line = lst_tmp
 
         if line[0] == 'var':
             if varChecker == True:
@@ -241,18 +243,23 @@ if len(errorsFound) == 0:
             if data == '1101000000000000':
                 instructionCounter += 1
                 break
+# print(instruction_temp)
 
 if len(errorsFound) == 0:
     if haltInstruction == False:
         errorsFound.append("No halt instruction in the code")
     # print("last_inst = ",lastInstuction)
     if haltInstruction == True and lastInstuction < len(instruction_temp):
-        errorsFound.append("hlt not the last instruction")
+        # print(lastInstuction)
+        # print(len(instruction_temp))
+        for i in range (lastInstuction,len(instruction_temp)):
+            if instruction_temp[i] != []:
+                errorsFound.append("hlt not the last instruction")
+                break
 if len(errorsFound) == 0:
     for code in machineCode:
         print(code)
 
 for errors in errorsFound:
     print(errors)
-
 
