@@ -198,7 +198,7 @@ if len(errorsFound) == 0:
             lst_tmp = []
             for j in range (1,len(instruction_temp[i])):
                 lst_tmp.append(instruction_temp[i][j])
-            # line = lst_tmp
+            line = lst_tmp
 
         if line[0] == 'var':
             if varChecker == True:

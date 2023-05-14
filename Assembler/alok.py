@@ -116,6 +116,10 @@ def MoveRegister(lst):
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1):
         return -1
+    
+    if lst[1] == 'FLAGS':
+        print("Move command doesn't support flags as first register")
+        return -1
 
     op_code = opcode("mov_reg")
     if (op_code == -1):

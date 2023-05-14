@@ -22,7 +22,7 @@ def right_shift(lst):
     
     
     
-    opcode_ans = opcoddd + '0' + (7-len(imm_val[2:]))*'0' + reg1 + imm_val
+    opcode_ans = opcoddd + '0'  + reg1 +  (7-len(imm_val[2:]))*'0'+ imm_val[2:]
     
     return opcode_ans
 
@@ -50,6 +50,6 @@ def left_shift(lst):
     return opcode_ans
     
 
-# lst1_4 = ['ls','R3','$31']
-# answer = left_shift(lst1_4)
+# lst1_4 = ['rs','R3','$31']
+# answer = right_shift(lst1_4)
 # print(answer)
