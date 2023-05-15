@@ -213,9 +213,9 @@ if len(errorsFound) == 0:
                     print("General syntax error")
                     break
                 if line[2] not in variables.keys():
-                    print(line)
+                    # print(line)
                     # machineCode.append(load(line))
-                    print(f"memory address in '{line[0]}' must be an existant variable")
+                    print(f"{line[2]} must be an existant variable")
                 else:
                     line[2] = variables[line[2]]
                     if (line[0] == 'ld'):
