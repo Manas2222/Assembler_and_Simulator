@@ -2,8 +2,9 @@ from Helper import *
 
 
 def halt(lst):
+    f = open("stdout.txt",'a')
     if len(lst) != 1:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     opcod = opcode(lst[0])
@@ -16,8 +17,9 @@ def halt(lst):
 
 
 def UnconditionaJump(lst):
+    f = open("stdout.txt",'a')
     if len(lst) != 2:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     opcod = opcode(lst[0])
@@ -30,8 +32,9 @@ def UnconditionaJump(lst):
     return opcod + '0000' + lst[1]
 
 def JumpIfLessThan(lst):
+    f = open("stdout.txt",'a')
     if len(lst) != 2:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     opcod = opcode(lst[0])
@@ -46,8 +49,9 @@ def JumpIfLessThan(lst):
 
     
 def JumpIfGreaterThan(lst):
+    f = open("stdout.txt",'a')
     if len(lst) != 2:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     opcod = opcode(lst[0])
@@ -61,8 +65,9 @@ def JumpIfGreaterThan(lst):
     
 
 def JumpIfEqual(lst):
+    f = open("stdout.txt",'a')
     if len(lst)  != 2:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     opcod = opcode(lst[0])

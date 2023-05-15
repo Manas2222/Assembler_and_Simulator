@@ -3,16 +3,17 @@ from Helper import *
 
 # lst = [ls, r1, $imm]
 def right_shift(lst):
+    f = open("stdout.txt",'a')
     if(len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     if lst[1] == 'FLAGS':
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
     if(registers(lst[1]) == -1 or opcode(lst[0]) == -1):
         return -1
     if not(int(lst[2][1:])>=0 and int(lst[2][1:])<=127):
-        print("Illegal immediate value")
+        f.write("Illegal immediate value\n")
         return -1
     
     opcoddd = opcode(lst[0])
@@ -27,17 +28,18 @@ def right_shift(lst):
     return opcode_ans
 
 def left_shift(lst):
+    f = open("stdout.txt",'a')
     if(len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     if lst[1] == 'FLAGS':
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
     if(registers(lst[1]) == -1 or opcode(lst[0]) == -1):
         return -1
     #Later add case for error found 
     if not(int(lst[2][1:])>=0 and int(lst[2][1:])<=127):
-        print("Illegal immediate value")
+        f.write("Illegal immediate value\n")
         return -1
     opcoddd = opcode(lst[0])
     reg1 = registers(lst[1])
@@ -52,4 +54,4 @@ def left_shift(lst):
 
 # lst1_4 = ['rs','R3','$31']
 # answer = right_shift(lst1_4)
-# print(answer)
+# f.write(answer)

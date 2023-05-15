@@ -3,7 +3,9 @@ from madhav import *
 from alok import *
 from mayank import *
 import sys
-
+f = open('stdout.txt','w')
+f.close()
+f = open('stdout.txt','a')
 
 errorsFound = []
 labels = {}
@@ -14,11 +16,11 @@ instructionCounter = 0
 
 def load(lst):
     if len(lst) != 3:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if lst[1] == 'R7':
-        print("Illegal use of flag register")
+        f.write("Illegal use of flag register\n")
 
     if registers(lst[1]) == -1:
         return -1
@@ -32,11 +34,11 @@ def load(lst):
 
 def store(lst):
     if len(lst) != 3:
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if lst[1] == 'R7':
-        print("Illegal use of flag register")
+        f.write("Illegal use of flag register\n")
         return -1
     
     if registers(lst[1]) == -1:
@@ -53,6 +55,7 @@ def store(lst):
 
 
 def functionMapper(lst):
+    f = open("stdout.txt",'a')
     x = lst[0]
     if x == 'xor':
         return exclusive_or(lst)
@@ -85,11 +88,11 @@ def functionMapper(lst):
         return left_shift(lst)
     elif x == 'jmp':
         if len(lst) != 2:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         
         if lst[1] not in labels.keys():
-            print(f"label {lst[1]} doesn't exist")
+            f.write(f"label {lst[1]} doesn't exist\n")
             return -1
         else:
             lst[1] = labels[lst[1]][0]
@@ -98,11 +101,11 @@ def functionMapper(lst):
         # return UnconditionaJump(lst)
     elif x == 'jlt':
         if len(lst) != 2:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         
         if lst[1] not in labels.keys():
-            print(f"label {lst[1]} doesn't exist")
+            f.write(f"label {lst[1]} doesn't exist\n")
             return -1
         else:
             lst[1] = labels[lst[1]][0]
@@ -110,11 +113,11 @@ def functionMapper(lst):
             
     elif x == 'jgt':
         if len(lst) != 2:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         
         if lst[1] not in labels.keys():
-            print(f"label {lst[1]} doesn't exits")
+            f.write(f"label {lst[1]} doesn't exits\n")
             return -1
         else:
             lst[1] = labels[lst[1]][0]
@@ -122,11 +125,11 @@ def functionMapper(lst):
             
     elif x == 'je':
         if len(lst) != 2:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         
         if lst[1] not in labels:
-            print(f"label {lst[1]} doesn't exist")
+            f.write(f"label {lst[1]} doesn't exist\n")
             return -1
         else:
             lst[1] = labels[lst[1]][0]
@@ -134,42 +137,46 @@ def functionMapper(lst):
     elif x == 'hlt':
         return halt(lst)
     elif x == 'ld':
-        print(lst)
+        # f.write(f'{lst}\n')
         if len(lst) != 3:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         if lst[2] in variables.keys():
             lst[2] = variables[lst[2]]
             return load(lst)
         
-        print("Wrong address")
+        f.write("Wrong address\n")
         return -1
     elif x == 'st':
         if len(lst) != 3:
-            print("General Syntax Error")
+            f.write("General Syntax Error\n")
             return -1
         if lst[2] in variables.keys():
             lst[2] = variables[lst[2]]
             return store(lst)
-        print("Wrong address")
+        f.write("Wrong address\n")
         return -1
     elif x[-1] == ':':
         return "Label"
-    print("Typo in instruction name")
+    f.write("Typo in instruction name\n")
     return -1
 
 
 
-instruction_temp = []
-for line in sys.stdin:
-    instruction_temp.append(line.strip())
+# instruction_temp = []
+# for line in sys.stdin:
+#     instruction_temp.append(line.strip())
 
+with open("stdin.txt",'r') as f1:
+    temp_lst_f = f1.readlines()
+
+instruction_temp = [i.strip() for i in temp_lst_f]
 
 label_lines_to_visit = []
 for i in range (len(instruction_temp)):
     if ':' in instruction_temp[i]:
         idx = instruction_temp[i].find(':')
-        # print(idx)
+        # f.write(idx)
         if instruction_temp[i][:idx] != instruction_temp[i][:idx].strip():
             errorsFound.append("No space allowed between label name and colon")
         if idx == len(instruction_temp[i])-1:
@@ -179,7 +186,7 @@ for i in range (len(instruction_temp)):
             labels[instruction_temp[i][:idx]] = [(7 - len(bin(127-len(labels.keys()))[2:]))*'0' + bin(127-len(labels.keys()))[2:] , i+1]
     
 instruction_temp = [i.strip().split() for i in instruction_temp]
-# print(instruction_temp)
+# f.write(instruction_temp)
 varChecker = False
 lastInstuction = 0
 line = []
@@ -188,11 +195,11 @@ if len(errorsFound) == 0:
         lastInstuction+=1
 
         if instruction_temp[i] == []:
-            # print('1')
+            # f.write('1')
             continue
 
         line = instruction_temp[i]
-        # print(line)
+        # f.write(line)
 
         if i in label_lines_to_visit:
             lst_tmp = []
@@ -210,12 +217,12 @@ if len(errorsFound) == 0:
             if line[0] == 'st' or line[0] == 'ld':
                 if len(line) != 3:
                     errorsFound.append(f"There is error in line numbered at {i+1}")
-                    print("General syntax error")
+                    f.write("General syntax error\n")
                     break
                 if line[2] not in variables.keys():
-                    # print(line)
+                    # f.write(line)
                     # machineCode.append(load(line))
-                    print(f"{line[2]} must be an existant variable")
+                    f.write(f"{line[2]} must be an existant variable\n")
                 else:
                     line[2] = variables[line[2]]
                     if (line[0] == 'ld'):
@@ -243,23 +250,24 @@ if len(errorsFound) == 0:
             if data == '1101000000000000':
                 instructionCounter += 1
                 break
-# print(instruction_temp)
+# f.write(instruction_temp)
 
 if len(errorsFound) == 0:
     if haltInstruction == False:
         errorsFound.append("No halt instruction in the code")
-    # print("last_inst = ",lastInstuction)
+    # f.write("last_inst = ",lastInstuction)
     if haltInstruction == True and lastInstuction < len(instruction_temp):
-        # print(lastInstuction)
-        # print(len(instruction_temp))
+        # f.write(lastInstuction)
+        # f.write(len(instruction_temp))
         for i in range (lastInstuction,len(instruction_temp)):
             if instruction_temp[i] != []:
                 errorsFound.append("hlt not the last instruction")
                 break
 if len(errorsFound) == 0:
     for code in machineCode:
-        print(code)
+        f.write(f'{code}\n')
 
 for errors in errorsFound:
-    print(errors)
+    f.write(f'{errors}\n')
 
+f.close()

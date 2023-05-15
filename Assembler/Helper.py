@@ -1,5 +1,6 @@
 
 def opcode(var):
+    f = open("stdout.txt",'a')
     opcodes = {
         'add' : '00000',
         'sub' : '00001',
@@ -25,10 +26,11 @@ def opcode(var):
     }
     if var in opcodes.keys():
         return opcodes[var]
-    print("General Syntax Error")
+    f.write("General Syntax Error\n")
     return -1
 
 def registers(var):
+    f = open("stdout.txt",'a')
     register = {
         'R0' : '000',
         'R1' : '001',
@@ -42,7 +44,7 @@ def registers(var):
 
     if var in register.keys():
         return register[var]
-    print("Typo in register name")
+    f.write("Typo in register name\n")
     return -1
 
 

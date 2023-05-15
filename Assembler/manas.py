@@ -3,14 +3,15 @@ from Helper import *
 # lst['add','R1','R2','R3']
 
 def exclusive_or(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     # if ((int(lst[1][-1]) > 7 and int(lst[1][-1]) < 0) or (int(lst[2][-1]) > 7 and int(lst[2][-1]) < 0) or (int(lst[3][-1]) > 7 and int(lst[3][-1]) < 0)):
     #     return False
         # We will change the flag register in the main function if any function returns false :)
     if (lst[1] == 'FLAGS' or lst[2] == 'FLAGS' or lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1 or registers(lst[3]) == -1):
@@ -25,12 +26,13 @@ def exclusive_or(lst):
 
 
 def Or(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (lst[1] == 'FLAGS' or lst[2] == 'FLAGS' or lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1 or registers(lst[3]) == -1):
@@ -44,12 +46,13 @@ def Or(lst):
 
 
 def And(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (lst[1] == 'FLAGS' or lst[2] == 'FLAGS' or lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1 or registers(lst[3]) == -1):
@@ -63,12 +66,13 @@ def And(lst):
 
 
 def invert(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (lst[1] == 'FLAGS' or lst[2] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1):
@@ -82,12 +86,13 @@ def invert(lst):
 
 
 def compare(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (lst[1] == 'FLAGS' or lst[2] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1 ):

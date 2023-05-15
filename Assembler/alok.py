@@ -2,12 +2,13 @@ from Helper import *
 
 
 def Addition(Lst):
+    f = open("stdout.txt",'a')
     if (len(Lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -23,12 +24,13 @@ def Addition(Lst):
 
 
 def Subtraction(Lst):
+    f = open("stdout.txt",'a')
     if (len(Lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -42,12 +44,13 @@ def Subtraction(Lst):
 
 
 def Multiply(Lst):
+    f = open("stdout.txt",'a')
     if (len(Lst) != 4):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS' or Lst[3] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1 or registers(Lst[3]) == -1):
@@ -61,12 +64,13 @@ def Multiply(Lst):
 
 
 def Divide(Lst):
+    f = open("stdout.txt",'a')
     if (len(Lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
     
     if (Lst[1] == 'FLAGS' or Lst[2] == 'FLAGS'):
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     if (registers(Lst[1]) == -1 or registers(Lst[2]) == -1):
@@ -80,26 +84,27 @@ def Divide(Lst):
 
 
 def MoveImmediate(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
 
     if (registers(lst[1]) == -1):
         return -1
     
     if lst[1] == 'FLAGS':
-        print("Illegal use of flags register")
+        f.write("Illegal use of flags register\n")
         return -1
 
     op_code = opcode(lst[0])
     if (op_code == -1):
         return -1
     if '.' in lst[2][1:]:
-        print("immediate should be whole number")
+        f.write("immediate should be whole number\n")
         return -1
     if not(int(lst[2][1:]) >= 0 and int(lst[2][1:]) <= 127):
-        # print("Faulty immediate value")
-        print("Illegal immediate value")
+        # f.write("Faulty immediate value")
+        f.write("Illegal immediate value\n")
         return -1
 
     imm = bin(int(lst[2][1:]))[2:]
@@ -110,15 +115,16 @@ def MoveImmediate(lst):
     # pass
 
 def MoveRegister(lst):
+    f = open("stdout.txt",'a')
     if (len(lst) != 3):
-        print("General Syntax Error")
+        f.write("General Syntax Error\n")
         return -1
 
     if (registers(lst[1]) == -1 or registers(lst[2]) == -1):
         return -1
     
     if lst[1] == 'FLAGS':
-        print("Move command doesn't support flags as first register")
+        f.write("Move command doesn't support flags as first register\n")
         return -1
 
     op_code = opcode("mov_reg")
@@ -130,4 +136,4 @@ def MoveRegister(lst):
 
 # lst1_2 = ['mov','R3','$0']
 # answer = MoveImmediate(lst1_2)
-# print(answer)
+# f.write(answer)
