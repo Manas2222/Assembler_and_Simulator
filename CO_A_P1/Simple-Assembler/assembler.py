@@ -238,7 +238,7 @@ while True:
                 # print(line)
                 # machineCode.append(load(line))
                 errorsFound.append(f"There is error in line numbered at {i+len(var_list)+1}")
-                print(f"{line[2]}: Variable must exist")
+                print(f"{line[2]}: Variable does not exist")
                 checker = -1
                 break
             else:
