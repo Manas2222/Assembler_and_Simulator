@@ -230,14 +230,15 @@ while True:
 
         if line[0] == 'st' or line[0] == 'ld':
             if len(line) != 3:
-               errorsFound.append(f"There is error in line numbered at {i+1}")
+               errorsFound.append(f"There is error in line numbered at {i+len(var_list)+1}")
                print("General syntax error")
                checker = -1
                break
             if line[2] not in variables.keys():
                 # print(line)
                 # machineCode.append(load(line))
-                print(f"{line[2]} must be an existant variable")
+                errorsFound.append(f"There is error in line numbered at {i+len(var_list)+1}")
+                print(f"{line[2]}: Variable must exist")
                 checker = -1
                 break
             else:
@@ -267,7 +268,7 @@ while True:
             continue
         if data == -1:
             # print(1)
-            errorsFound.append(f"There is error in line numbered at {i+1}")
+            errorsFound.append(f"There is error in line numbered at {i+len(var_list)+1}")
             checker = -1
             break
 
