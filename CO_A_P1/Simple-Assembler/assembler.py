@@ -280,14 +280,14 @@ while True:
             break
 
     # print(labels)
-
-
     if checker == -1:
         break    
     if haltInstruction == True:
         break 
 
     break
+
+
 
 if (len(errorsFound ) == 0):
     if haltInstruction == False:
@@ -296,12 +296,13 @@ if (len(errorsFound ) == 0):
     if haltInstruction == True and lastInstruction < len(instruction_temp):
         errorsFound.append("hlt not the last instruction")
 
+if len(machineCode) > 256:
+    errorsFound.append("More then 256 lines not allowed")
 
 
 if (len(errorsFound) != 0):
     for i in errorsFound:
         print(i)
-
 if len(errorsFound) == 0:
     for code in machineCode:
         print(f'{code}')
