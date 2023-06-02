@@ -225,7 +225,8 @@ while True:
             idx = instruction_temp[i].find(':')
             tmp = instruction_temp[i][idx+1:]
             temp_lst = tmp.strip().split()
-            line = temp_lst
+            if temp_lst != []:
+                line = temp_lst
         
 
         if line[0] == 'st' or line[0] == 'ld':
