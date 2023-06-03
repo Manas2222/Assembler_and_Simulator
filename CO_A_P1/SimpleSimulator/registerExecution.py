@@ -79,6 +79,11 @@ class Registers:
         return
     
 
+    def setFlagEqual(self):
+        self.registers['111'] = '0000000000000001'
+        return
+
+
     def setFlagGreater(self):
         self.registers['111'] = '0000000000000010'
         return
@@ -87,14 +92,6 @@ class Registers:
     def setFlagLess(self):
         self.registers['111'] = '0000000000000100'
         return
-    
-
-    def setFlagEqual(self):
-        self.registers['111'] = '0000000000000001'
-        return
-    
-    
-    
 
 
 
