@@ -13,6 +13,7 @@ class Memory:
             self.memoryArray.append('0000000000000000')
         return
 
+
     def initialize(self):
         counter = 0
         for line in stdin:
@@ -46,6 +47,7 @@ class Memory:
         idx = convert7bitStringToInt(mem_addr)
         self.memoryArray[idx] =  bin_val
         return
+    
     
     def dump(self):
         for i in range (len(self.memoryArray)):
