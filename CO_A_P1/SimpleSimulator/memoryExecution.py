@@ -9,7 +9,7 @@ class Memory:
     
     
     def __init__(self):
-        for i in range (256):
+        for i in range (128):
             self.memoryArray.append('0000000000000000')
 
 
@@ -22,11 +22,33 @@ class Memory:
 
     
     def fetchData(self,prgramCounter):
-        instNum = convert7bitStringToBin(prgramCounter)
-        instruction = self.memoryArray[instNum]
+        # instNum = convert7bitStringToBin(prgramCounter)
+        instruction = self.memoryArray[prgramCounter]
         return instruction
     
 
-
-
+    def dump(self):
+        for i in range (len(self.memoryArray)):
+            print(self.memoryArray[i])
+        return
     
+
+    def loadFromAddress(self,reg1,mem_addr):
+        idx = int(mem_addr,2)
+        RF.setRegister(reg1,int(self.memoryArray[idx],2))
+        return
+    
+
+    def storeAtAddress(self,reg1,mem_addr):
+        val = RF.getRegister(reg1)
+        bin_val = convertIntTo16BitBin(val)
+        idx = convert7bitStringToBin(mem_addr)
+        self.memoryArray[idx] =  bin_val
+        return
+    
+
+    # def
+
+
+
+MEM = Memory()

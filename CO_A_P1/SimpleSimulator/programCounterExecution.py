@@ -1,7 +1,7 @@
 
 
 
-class progCounter:
+class ProgCounter:
 
     progCounter = 0
 
@@ -19,4 +19,4 @@ class progCounter:
 
 
 
-PC = progCounter()
+PC = ProgCounter()

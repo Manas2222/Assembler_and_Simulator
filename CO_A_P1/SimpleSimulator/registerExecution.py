@@ -14,6 +14,11 @@ def convert7bitStringToBin(data):
     return answer
 
 
+def convertIntTo16BitBin(data):
+    ans = bin(data)[2:].zfill(16)
+    return ans
+
+
 
 class Registers:
 
@@ -49,9 +54,20 @@ class Registers:
     def defaultFlag(self):
         self.registers['111'] = '0000000000000000'
             
+    
+    def dump(self):
+        for k,v in self.registers.items():
+            print(v,sep = ' ')
+        print()
+        return
+    
 
 RF = Registers()
 
 
-# RF.setRegister('000', 2**16 + 2)
-# print(RF.registers)
+# RF.dump()
+# a = 26
+# print(convertIntTo16BitBin(a))
+
+# RF.setRegister('000',2**15 + 3 << 2)
+# RF.dump()
