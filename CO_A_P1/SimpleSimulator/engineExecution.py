@@ -8,7 +8,8 @@ class EngineExecution:
 
     def execute(self,instruction):
 
-        haltEncountered, programCounter = False,0
+        haltEncountered = False
+        programCounter = 0
         opcode_ = instruction[0:5]
 
         if opcode_ == '00000':
@@ -242,7 +243,9 @@ class EngineExecution:
             haltEncountered = True
             programCounter = PC.getPC() + 1
             RF.defaultFlag()
-
+            PC.resetCounter()
+            RF.resetRegisters()
+            MEM.resetMemory()
         return haltEncountered,programCounter
     
 

@@ -11,7 +11,7 @@ class Memory:
     def __init__(self):
         for i in range (128):
             self.memoryArray.append('0000000000000000')
-
+        return
 
     def initialize(self):
         counter = 0
@@ -19,19 +19,20 @@ class Memory:
             self.memoryArray[counter] = str(line)
             counter += 1
         self.instructionNumber = counter
+        return
+
+
+    def resetMemory(self):
+        self.memoryArray = []
+        self.instructionNumber = 0
+        return
 
     
     def fetchData(self,prgramCounter):
-        # instNum = convert7bitStringToBin(prgramCounter)
+        # instNum = convert7bitStringToInt(prgramCounter)
         instruction = self.memoryArray[prgramCounter]
         return instruction
-    
-
-    def dump(self):
-        for i in range (len(self.memoryArray)):
-            print(self.memoryArray[i])
-        return
-    
+     
 
     def loadFromAddress(self,reg1,mem_addr):
         idx = int(mem_addr,2)
@@ -42,10 +43,14 @@ class Memory:
     def storeAtAddress(self,reg1,mem_addr):
         val = RF.getRegister(reg1)
         bin_val = convertIntTo16BitBin(val)
-        idx = convert7bitStringToBin(mem_addr)
+        idx = convert7bitStringToInt(mem_addr)
         self.memoryArray[idx] =  bin_val
         return
     
+    def dump(self):
+        for i in range (len(self.memoryArray)):
+            print(self.memoryArray[i])
+        return
 
     # def
 

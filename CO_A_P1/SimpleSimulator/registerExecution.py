@@ -8,7 +8,7 @@ def overflowChecker(data):
     return False
 
 
-def convert7bitStringToBin(data):
+def convert7bitStringToInt(data):
     answer = (int(data,2))
     # print(answer)
     return answer
@@ -45,14 +45,31 @@ class Registers:
         else:
             temp = bin(val)[2:]
             self.registers[regNum] = temp[len(temp) - 16 : ]
+        return
+
+
+    def resetRegisters(self):
+        self.registers = {
+        "000" : '0000000000000000',
+        "001" : '0000000000000000',
+        "010" : '0000000000000000',
+        "011" : '0000000000000000',
+        "100" : '0000000000000000',
+        "101" : '0000000000000000',
+        "110" : '0000000000000000',
+        '111' : '0000000000000000'
+    }
+        return
 
 
     def setOverflow(self):
         self.registers['111'] = '0000000000001000'
+        return
 
     
     def defaultFlag(self):
         self.registers['111'] = '0000000000000000'
+        return
             
     
     def dump(self):
@@ -61,17 +78,22 @@ class Registers:
         print()
         return
     
+
     def setFlagGreater(self):
         self.registers['111'] = '0000000000000010'
         return
+
 
     def setFlagLess(self):
         self.registers['111'] = '0000000000000100'
         return
     
+
     def setFlagEqual(self):
         self.registers['111'] = '0000000000000001'
         return
+    
+    
     
 
 
