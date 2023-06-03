@@ -1,14 +1,17 @@
+from memoryExecution import *
+from programCounterExecution import *
+from engineExecution import *
+from registerExecution import *
 
 
 
 
-
-memory.initialize()
+MEM.initialize()
 progCounter = 0
 counteredHalt = False
 
 while (not counteredHalt):
-    instruction = memory.fetchData(progCounter)
+    instruction = MEM.fetchData(progCounter)
     counteredHalt, newPC = EE.execute(instruction)
     PC.dump()
     RF.dump()

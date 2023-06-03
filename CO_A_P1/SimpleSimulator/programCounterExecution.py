@@ -1,4 +1,7 @@
 
+def convertIntTo7BitBin(data):
+    ans = bin(data)[2:].zfill(7)
+    return ans
 
 
 class ProgCounter:
@@ -11,12 +14,14 @@ class ProgCounter:
 
 
     def getPC(self):
-        return self.progCounter()
+        return self.progCounter
     
 
     def update(self,val):
         self.progCounter = val
 
+    def dump(self):
+        print(convertIntTo7BitBin(self.progCounter), end=' ')
 
 
 PC = ProgCounter()

@@ -1,3 +1,5 @@
 a = 25
 b = 10
-print(a^b)
+c = bin(a)[2:]
+print(c)
+# for i 

@@ -27,9 +27,9 @@ class EngineExecution:
 
             # PC.update(PC.getPC() + 1)
             haltEncountered = False
-            programCounter = PC.getPC + 1
+            programCounter = PC.getPC() + 1
 
-        if opcode_ == '00001':
+        elif opcode_ == '00001':
             tempReg1 = instruction[7:10]
             tempReg2 = instruction[10:13]
             tempReg3 = instruction[13:16]
@@ -46,27 +46,27 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
 
-        if opcode_ == '00010':
+        elif opcode_ == '00010':
             tempReg1 = instruction[6:9]
             immVal = instruction[9:]
 
             RF.setRegister(tempReg1,int(immVal,2))
             # PC.update(PC.getPC() + 1)
             haltEncountered = False
-            programCounter = PC.getPC + 1
+            programCounter = PC.getPC() + 1
             RF.defaultFlag()
         
-        if opcode_ == '00011':
+        elif opcode_ == '00011':
             tempReg1 = instruction[10:13]
             tempReg2 = instruction[13:16]
             reg2Val = RF.getRegister(tempReg2)
             RF.setRegister(tempReg1,reg2Val)
             # PC.update(PC.getPC() + 1)
             haltEncountered = False
-            programCounter = PC.getPC + 1
+            programCounter = PC.getPC() + 1
             RF.defaultFlag()
         
-        if opcode_ == '00100':
+        elif opcode_ == '00100':
             tempReg1 = instruction[6:9]
             mem_addr = instruction[9:]
             MEM.loadFromAddress(tempReg1,mem_addr)
@@ -75,16 +75,16 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
         
-        if opcode_ == '00101':
+        elif opcode_ == '00101':
             tempReg1 = instruction[6:9]
             mem_addr = instruction[9:]
-            MEM.storeAtAddress(tempReg1,mem_addr)
+            MEM.sloadFromAddress(tempReg1,mem_addr)
             RF.defaultFlag()
             # PC.update(PC.getPC() + 1)
             haltEncountered = False
             programCounter = PC.getPC() + 1
 
-        if opcode_ == '00110':
+        elif opcode_ == '00110':
             tempReg1 = instruction[7:10]
             tempReg2 = instruction[10:13]
             tempReg3 = instruction[13:16]
@@ -99,7 +99,7 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
 
-        if opcode_ == '00111':
+        elif opcode_ == '00111':
             tempReg1 = instruction[10:13]
             tempReg2 = instruction[13:16]
             val1 = RF.getRegister(tempReg1)
@@ -111,7 +111,7 @@ class EngineExecution:
             programCounter = PC.getPC() + 1
             
 
-        if opcode_ == '01000':
+        elif opcode_ == '01000':
             tempReg1 = instruction[6:9]
             imm = instruction[9:]
             value = RF.getRegister(tempReg1)
@@ -123,7 +123,7 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
 
-        if opcode_ == '01001':
+        elif opcode_ == '01001':
             tempReg1 = instruction[6:9]
             imm = instruction[9:]
             value = RF.getRegister(tempReg1)
@@ -139,7 +139,7 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
         
-        if opcode_ == '01010':
+        elif opcode_ == '01010':
             tempReg1 = instruction[7:10]
             tempReg2 = instruction[10:13]
             tempReg3 = instruction[13:16]
@@ -151,4 +151,99 @@ class EngineExecution:
             haltEncountered = False
             programCounter = PC.getPC() + 1
         
-        # if opcode_ == ''
+        elif opcode_ == '01011':
+            tempReg1 = instruction[7:10]
+            tempReg2 = instruction[10:13]
+            tempReg3 = instruction[13:16]
+            val1 = RF.getRegister(tempReg2)
+            val2 = RF.getRegister(tempReg3)
+            answer = val1 | val2
+            RF.setRegister(tempReg1,answer)
+            RF.defaultFlag()
+            haltEncountered = False
+            programCounter = PC.getPC() + 1
+
+        elif opcode_ == '01100':
+            tempReg1 = instruction[7:10]
+            tempReg2 = instruction[10:13]
+            tempReg3 = instruction[13:16]
+            val1 = RF.getRegister(tempReg2)
+            val2 = RF.getRegister(tempReg3)
+            answer = val1 & val2
+            RF.setRegister(tempReg1,answer)
+            RF.defaultFlag()
+            haltEncountered = False
+            programCounter = PC.getPC() + 1
+
+        elif opcode_== '01101':
+            tempReg1 = instruction[10:13]
+            tempReg2 = instruction[13:16]
+            val1 = RF.getRegister(tempReg2)
+            temp = convertIntTo16BitBin(val1)
+            inverted_num = ''
+            for i in range(len(temp)):
+                if temp[i] == '0':
+                    inverted_num += '1'
+                else:
+                    inverted_num += '0'
+            RF.setRegister(tempReg1,int(inverted_num,2))
+            RF.defaultFlag()
+            haltEncountered = False
+            programCounter = PC.getPC() + 1
+        
+        elif opcode_ == '01110':
+            tempReg1 = instruction[10:13]
+            tempReg2 = instruction[13:16]
+            val1 = RF.getRegister(tempReg1)
+            val2 = RF.getRegister(tempReg2)
+            if val1 > val2:
+                RF.setFlagGreater()
+            elif val1 < val2:
+                RF.setFlagLess()
+            else:
+                RF.setFlagEqual()
+            haltEncountered = False
+            programCounter = PC.getPC() + 1
+
+        elif opcode_ == '01111':
+            mem_addr = instruction[9:]
+            haltEncountered = False
+            programCounter = int(mem_addr,2)
+            RF.defaultFlag()
+
+        elif opcode_ == '11100':
+            mem_addr = instruction[9:]
+            if RF.getRegister('111') == '0000000000000100':
+                programCounter = int(mem_addr,2)
+            else:
+                programCounter = PC.getPC() + 1
+            haltEncountered = False
+            RF.defaultFlag()
+        
+        elif opcode_ == '11101':
+            mem_addr = instruction[9:]
+            if RF.getRegister('111') == '0000000000000010':
+                programCounter = int(mem_addr,2)
+            else:
+                programCounter = PC.getPC() + 1
+            haltEncountered = False
+            RF.defaultFlag()
+
+        elif opcode_ == '11111':
+            mem_addr = instruction[9:]
+            if RF.getRegister('111') == '0000000000000001':
+                programCounter = int(mem_addr,2)
+            else:
+                programCounter = PC.getPC() + 1
+            haltEncountered = False
+            RF.defaultFlag()
+
+        elif opcode_ == '11010':
+            haltEncountered = True
+            programCounter = PC.getPC() + 1
+            RF.defaultFlag()
+
+        return haltEncountered,programCounter
+    
+
+EE = EngineExecution()
