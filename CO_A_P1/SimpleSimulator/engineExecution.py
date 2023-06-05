@@ -7,11 +7,16 @@ class EngineExecution:
     # instruction = ''
 
     def execute(self,instruction):
+        '''Normal convention in below code followed is 
+        first taking the registers which are to be used 
+        then performing that operation
+        checking for any possible overflow or any other condition
+        then incrementing the program counter.'''
 
         haltEncountered = False
         programCounter = 0
         opcode_ = instruction[0:5]
-
+        
         if opcode_ == '00000':
 
             tempReg1 = instruction[7:10]
