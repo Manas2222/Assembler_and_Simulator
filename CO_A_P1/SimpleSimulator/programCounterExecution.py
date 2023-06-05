@@ -5,7 +5,7 @@ def convertIntTo7BitBin(data):
 
 
 class ProgCounter:
-
+'''Taking progcounter as -1 for defualt'''
     progCounter = -1
 
 
@@ -22,7 +22,7 @@ class ProgCounter:
         self.progCounter = -1
         return
 
-
+'''Updating the counter to its value'''
     def update(self,val):
         self.progCounter = val
         return
