@@ -4,7 +4,7 @@ from engineExecution import *
 from registerExecution import *
 
 
-
+'''Initialing and running of code untill halt isn't encountered'''
 
 MEM.initialize()
 progCounter = 0
