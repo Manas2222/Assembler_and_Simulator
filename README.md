@@ -6,3 +6,9 @@ The assembler is resposible to convert the provided assembly code into binary ma
 
 ### How To Evaluate
 * Go to ``automatedTesting`` directory and execute the file named ``run`` with the argument ``--no-sim`` to evaluate the assembler only.
+
+## CO Project - Simulator
+Function - To operate on given memory and registers to perfrom different functions.
+
+### How To Evaluate
+* Go to ``automatedTesting`` directory and execute the file named ``run`` to evaluate the assembler along with simulator.
