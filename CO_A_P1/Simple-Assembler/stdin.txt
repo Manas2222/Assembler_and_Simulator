@@ -1,0 +1,4 @@
+addf R1 R2 R3
+subf R3 R4 R2
+movf R6 R0 R2
+hlt

@@ -2,6 +2,7 @@ from manas import *
 from madhav import *
 from alok import *
 from mayank import *
+from Floating import *
 import sys
 
 
@@ -153,10 +154,17 @@ def functionMapper(lst):
             return store(lst)
         print("Wrong address")
         return -1
+    elif x == 'addf':
+        return add_floating(lst)
+    elif x == 'subf':
+        return sub_floating(lst)
+    elif x == 'movf':
+        return mov_floating(lst)
     elif x[-1] == ':':
         return "Label"
     print("Typo in instruction name")
     return -1
+
 
 
 

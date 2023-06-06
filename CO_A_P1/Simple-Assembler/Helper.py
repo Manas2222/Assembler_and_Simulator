@@ -20,8 +20,10 @@ def opcode(var):
         'jlt' : '11100',
         'jgt' : '11101',
         'je' : '11111',
-        'hlt' : '11010'
-
+        'hlt' : '11010',
+        'addf' : '10000',
+        'subf' : '10001',
+        'movf' : '10010'
     }
     if var in opcodes.keys():
         return opcodes[var]
