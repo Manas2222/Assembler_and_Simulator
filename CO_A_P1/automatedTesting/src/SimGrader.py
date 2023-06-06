@@ -8,11 +8,11 @@ class SimGrader(Grader):
 	SIMPLE_MARKS = 2
 	HARD_MARKS = 5
 
-	BIN_HARD_DIR = "bin_h"
-	BIN_SIMPLE_DIR = "bin_s"
+	BIN_HARD_DIR = "hard"
+	BIN_SIMPLE_DIR = "simple"
 
-	TRACE_HARD_DIR = "bin_h"
-	TRACE_SIMPLE_DIR = "bin_s"
+	TRACE_HARD_DIR = "hard"
+	TRACE_SIMPLE_DIR = "simple"
 
 
 	SIM_RUN_DIR = "../SimpleSimulator/"
@@ -27,7 +27,7 @@ class SimGrader(Grader):
 		totalCount = 0
 		
 		curDir = os.getcwd()
-		tests = self.listFiles("tests/assembly/" + genDir)
+		tests = self.listFiles("tests/bin/" + genDir)
 		tests.sort()
 		os.chdir(self.SIM_RUN_DIR)
 		
