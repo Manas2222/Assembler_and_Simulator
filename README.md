@@ -1,7 +1,9 @@
 # CO_Project
-## CO project - Assembler
+
 Course - Computer Organization, CSE112
 Winter Semester 2023.</br>
+
+## CO project - Assembler
 The assembler is resposible to convert the provided assembly code into binary machine code. The assembler is based on the ISA mentioned. The program has been written in Python language.
 
 ### How To Evaluate
