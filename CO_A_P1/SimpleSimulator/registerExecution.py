@@ -18,7 +18,7 @@ def convertIntTo16BitBin(data):
     ans = bin(data)[2:].zfill(16)
     return ans
 
-''''Coding for ISA'''
+''''Coding for Registerss'''
 
 class Registers:
 
@@ -60,7 +60,7 @@ class Registers:
         '111' : '0000000000000000'
     }
         return
-'''Flag execution functions for equal, greater than, less than'''
+    '''Flag execution functions for equal, greater than, less than'''
 
     def setOverflow(self):
         self.registers['111'] = '0000000000001000'

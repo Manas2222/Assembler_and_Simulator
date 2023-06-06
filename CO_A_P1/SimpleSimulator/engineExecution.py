@@ -9,9 +9,9 @@ class EngineExecution:
     def execute(self,instruction):
         '''Normal convention in below code followed is 
         first taking the registers which are to be used 
-        then performing that operation
+        then performing the operation expected and
         checking for any possible overflow or any other condition
-        then incrementing the program counter.'''
+        then incrementing the program counter and ressetting the flag if not used.'''
 
         haltEncountered = False
         programCounter = 0

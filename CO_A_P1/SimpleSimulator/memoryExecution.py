@@ -3,7 +3,7 @@ from registerExecution import *
 
 
 class Memory:
-'''Functions for working with memory and memory related instructions.'''
+    '''Functions for working with memory and memory related instructions.'''
     memoryArray = []
     instructionNumber = 0
     
