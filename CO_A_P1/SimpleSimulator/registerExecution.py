@@ -74,7 +74,7 @@ class Registers:
     
     def dump(self):
         for k,v in self.registers.items():
-            print(v,sep = ' ')
+            print(v,end = ' ')
         print()
         return
     

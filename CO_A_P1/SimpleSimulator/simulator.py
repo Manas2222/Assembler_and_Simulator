@@ -20,3 +20,7 @@ while (not counteredHalt):
     PC.update(newPC)
 
 MEM.dump()
+RF.defaultFlag()
+PC.resetCounter()
+RF.resetRegisters()
+MEM.resetMemory()

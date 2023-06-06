@@ -84,7 +84,7 @@ class EngineExecution:
         elif opcode_ == '00101':
             tempReg1 = instruction[6:9]
             mem_addr = instruction[9:]
-            MEM.sloadFromAddress(tempReg1,mem_addr)
+            MEM.storeAtAddress(tempReg1,mem_addr)
             RF.defaultFlag()
             # PC.update(PC.getPC() + 1)
             haltEncountered = False

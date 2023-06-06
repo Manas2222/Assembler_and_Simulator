@@ -30,7 +30,7 @@ class ProgCounter:
 
     def dump(self):
         # print(self.progCounter)
-        print(convertIntTo7BitBin(self.progCounter), end=' ')
+        print(convertIntTo7BitBin(self.progCounter), end='        ')
         return
 
 
