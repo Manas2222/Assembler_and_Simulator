@@ -247,10 +247,10 @@ class EngineExecution:
         elif opcode_ == '11010':
             haltEncountered = True
             programCounter = PC.getPC() + 1
-            RF.defaultFlag()
-            PC.resetCounter()
-            RF.resetRegisters()
-            MEM.resetMemory()
+            # RF.defaultFlag()
+            # PC.resetCounter()
+            # RF.resetRegisters()
+            # MEM.resetMemory()
         return haltEncountered,programCounter
     
 

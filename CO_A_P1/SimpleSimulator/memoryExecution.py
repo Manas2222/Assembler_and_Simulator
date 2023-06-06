@@ -16,8 +16,8 @@ class Memory:
 
     def initialize(self):
         counter = 0
-        for line in stdin:
-            self.memoryArray[counter] = str(line)
+        for line in stdin.readlines():
+            self.memoryArray[counter] = line.strip()
             counter += 1
         self.instructionNumber = counter
         return

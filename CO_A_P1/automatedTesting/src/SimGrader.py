@@ -22,17 +22,20 @@ class SimGrader(Grader):
 		self.enable = enable
 
 	def handleBin(self, genDir, expDir):
-		
+		# print(2)
 		passCount = 0
 		totalCount = 0
 		
 		curDir = os.getcwd()
+		# print(curDir)
 		tests = self.listFiles("tests/bin/" + genDir)
 		tests.sort()
+		# print(3)
 		os.chdir(self.SIM_RUN_DIR)
-		
+		# print(5)
 		for test in tests:
 			generatedTrace = os.popen("./run < " + "../automatedTesting/tests/bin/" + genDir + "/" + test).readlines()
+			# print(7)
 			expectedTrace = os.popen("cat " + "../automatedTesting/tests/traces/" + expDir + "/" + test).readlines()
 
 			if self.diff(generatedTrace, expectedTrace):
@@ -41,7 +44,7 @@ class SimGrader(Grader):
 			else:
 				self.printSev(self.HIGH, bcolors.FAIL + "[FAILED]" + bcolors.ENDC + " " + test)
 			totalCount += 1
-
+		# print(6)
 		os.chdir(curDir)
 		return passCount, totalCount
 	
