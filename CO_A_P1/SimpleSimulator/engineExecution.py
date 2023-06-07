@@ -210,6 +210,7 @@ class EngineExecution:
                 RF.setFlagEqual()
             haltEncountered = False
             programCounter = PC.getPC() + 1
+            # print(RF.registers['111'])
 
         elif opcode_ == '01111':
             mem_addr = instruction[9:]
@@ -219,7 +220,7 @@ class EngineExecution:
 
         elif opcode_ == '11100':
             mem_addr = instruction[9:]
-            if RF.getRegister('111') == '0000000000000100':
+            if convertIntTo16BitBin(RF.getRegister('111')) == '0000000000000100':
                 programCounter = int(mem_addr,2)
             else:
                 programCounter = PC.getPC() + 1
@@ -228,16 +229,20 @@ class EngineExecution:
         
         elif opcode_ == '11101':
             mem_addr = instruction[9:]
-            if RF.getRegister('111') == '0000000000000010':
+            # print(mem_addr)
+            # print(RF.registers['111'])
+            if convertIntTo16BitBin(RF.getRegister('111')) == '0000000000000010':
+                # print('set')
                 programCounter = int(mem_addr,2)
             else:
                 programCounter = PC.getPC() + 1
+            # print(programCounter)
             haltEncountered = False
             RF.defaultFlag()
 
         elif opcode_ == '11111':
             mem_addr = instruction[9:]
-            if RF.getRegister('111') == '0000000000000001':
+            if convertIntTo16BitBin(RF.getRegister('111')) == '0000000000000001':
                 programCounter = int(mem_addr,2)
             else:
                 programCounter = PC.getPC() + 1
